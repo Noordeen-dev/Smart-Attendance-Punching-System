@@ -1,0 +1,203 @@
+<div class="page">
+    <div class="layout">
+        <nav class="menu" [class.collapsed]="isCollapsed" *ngIf="!hideMenu">
+    
+        <button class="menuClose" (click)="toggleMenu()">
+            <span id="menutxt">☰</span>
+            <span class="menu-text">MENU</span>
+        </button>
+    
+        <div class="user-details">
+            <img [src]="profileImage" class="profile-img" alt="Profile">
+            <div class="user-info">
+                <h3>{{ Name }}</h3>
+                <p>EmpID : {{ empId }}</p>
+            </div>
+            </div>
+            
+        <ul>
+            <li (click)="dash()">
+                <a>
+                    <img src="assets/images/HomeIcon.png" alt="Icon" class="icon">
+                    <span class="menu-text">Home</span>
+                </a>
+            </li>
+    
+            <li (click)="NewReg()">
+                <a>
+                    <img src="assets/images/NewIcon.png" alt="Icon" class="icon">
+                    <span class="menu-text">New Registration</span>
+                </a>
+            </li>
+
+            <li (click)="ForPass()">
+                <a>
+                    <img src="assets/images/PasswordIcon.png" alt="Icon" class="icon">
+                    <span class="menu-text">Change Password</span>
+                </a>
+            </li>
+    
+            <li (click)="userData()">
+                <a>
+                    <img src="assets/images/UserIcon.png" alt="Icon" class="icon">
+                    <span class="menu-text">User Data</span>
+                </a>
+            </li>
+
+            <li>
+                <a>
+                    <img src="assets/images/AttendanceIcon.png" alt="Icon" class="icon">
+                    <span class="menu-text">Attendance</span>
+                </a>
+            </li>
+    
+            <li (click)="logOut()">
+                <a>
+                    <img src="assets/images/LogOutIcon.png" alt="Icon" class="icon">
+                    <span class="menu-text">Logout</span>
+                </a>
+            </li>
+
+            <li (click)="Exit()">
+                <a>
+                    <img src="assets/images/ExitIcon.png" alt="Icon" class="icon">
+                    <span class="menu-text">Exit</span>
+                </a>
+            </li>
+        </ul>
+    
+        </nav>
+        <!-- Attendance Section -->
+        <div class="attendance">
+
+            <!-- Punching Section -->
+            <div class="punch-box">
+                <h3>PUNCH IN / PUNCH OUT</h3>
+                <p><strong>Date:</strong> {{ today | date:'dd-MM-yyyy' }}</p>
+                <p><strong>Time:</strong> {{ currentTime }}</p>
+    
+                <button class="punchIn-btn" (click)="punchIn()" [disabled]="punchInDisabled">Punch In</button>
+    
+                <button class="punchOut-btn" (click)="punchOut()" [disabled]="punchOutDisabled">Punch Out</button>
+            </div>
+            
+            <div class="table-select">
+                <label>Select Table :</label>
+                
+                <select #tableSelect (change)="changeTable(tableSelect.value)">
+                    <option value="today">Today Attendance</option>
+                    <option value="overall">Overall Attendance</option>
+                    <option value="present">Today Presenties</option>
+                    <option value="shift">Shift Details</option>
+                </select>
+            </div>
+                
+            <!-- Today Attendance Details Table -->
+            <div *ngIf="selectedTable === 'today'">
+                <h3>TODAY ATTENDANCE</h3>
+                <table>
+                    <tr>
+                    <th>DATE</th>
+                    <th>SESSION</th>
+                    <th>IN</th>
+                    <th>OUT</th>
+                    <th>ACTIVE MINUTES</th>
+                    <th>STATUS</th>
+                    </tr>
+                
+                    <tr *ngFor="let a of attendanceList">
+                    <td>{{ a.date | date:'dd-MM-yyyy' }}</td>
+                    <td>{{a.session}}</td>
+                    <td>{{ (a.logIn | date: 'HH:mm:ss') || '-' }}</td>
+                    <td>{{ (a.logOut | date: 'HH:mm:ss') || '-' }}</td>
+                    <td>{{ a.totalMinutes ? (a.totalMinutes) : '0' }} mins</td>
+                    <td>{{ a.status }}</td>
+                    </tr>
+                </table>
+            </div>
+            <!-- Overall Attendance Details Table-->
+            <div *ngIf="selectedTable === 'overall'">
+                <h3>OVERALL ATTENDANCE</h3>
+                <table>
+                    <tr>
+                        <th>ATD ID</th>
+                        <th>EMP ID</th>
+                        <th>SHIFT ID</th>
+                        <th>SHIFT</th>
+                        <th>DATE</th>
+                        <th>LOG IN</th>
+                        <th>LOG OUT</th>
+                        <th>TOTAL HRS</th>
+                        <th>STATUS</th>
+                        <th>OT</th>
+                    </tr>
+
+                    <tr *ngFor="let a of allAttendance" [class.low-ot]="a.overTime < 0">
+                        <td>{{a.attendanceID}}</td>
+                        <td>{{a.empID}}</td>
+                        <td>{{a.shiftID}}</td>
+                        <td>{{a.shiftName}}</td>
+                        <td>{{a.date | date : 'dd-MM-yyyy'}}</td>
+                        <td>{{ (a.logIn | date: 'HH:mm:ss') || '-' }}</td>
+                        <td>{{ (a.logOut | date: 'HH:mm:ss') || '-' }}</td>
+                        <td>{{ a.totalHours? (a.totalHours) : '0' }} hrs</td>
+                        <td>{{ a.status }}</td>
+                        <td>{{ a.overTime? (a.overTime) : '0' }} Mins</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Today Presents List-->
+            <div *ngIf="selectedTable === 'present'">
+                <h3>TODAY PRESENTIES</h3>
+                <table>
+                    <tr>
+                        <th>SNO.</th>
+                        <th>SHIFT ID</th>
+                        <th>EMP ID</th>
+                        <th>NAME</th>
+                        <th>IN</th>
+                        <th>OUT</th>
+                        <th>STATUS</th>
+                    </tr>
+
+                    <tr *ngFor="let t of todayPresent; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{t.shiftID}}</td>
+                        <td>{{t.empID}}</td>
+                        <td>{{t.name}}</td>
+                        <td>{{(t.logIn | date: 'HH:mm:ss') || '-'}}</td>
+                        <td>{{(t.logOut | date: 'HH:mm:ss') || '-'}}</td>
+                        <td>{{t.status}}</td>
+                    </tr>
+                </table>
+
+            </div>
+            <!-- Employee Shift Details -->
+            <div *ngIf="selectedTable === 'shift'">
+                <h3>EMPLOYEE'S SHIFT</h3>
+                <table>
+                    <tr>
+                        <th>SNO.</th>
+                        <th>EMP ID</th>
+                        <th>SHIFT</th>
+                        <th>NAME</th>
+                        <th>START TIME</th>
+                        <th>END TIME</th>
+                        <th>EFFECTIVE FROM</th>
+                    </tr>
+
+                    <tr *ngFor="let e of employeeShift; let i = index">
+                        <td>{{i+1}}</td>
+                        <td>{{e.empID}}</td>
+                        <td>{{e.shiftName}} ({{e.shiftID}})</td>
+                        <td>{{e.name}}</td>
+                        <td>{{e.startTime}}</td>
+                        <td>{{e.endTime}}</td>
+                        <td>{{e.effectiveFrom | date : 'dd-MM-yyyy'}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

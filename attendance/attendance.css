@@ -1,0 +1,403 @@
+/* ===== LAYOUT ===== */
+.layout {
+  display: flex;
+  min-height: 100vh;
+  background: #0f172a;
+}
+
+/* ===== SIDEBAR ===== */
+.menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 260px;
+  height: 100vh;
+  padding: 20px 16px;
+
+  background: linear-gradient(180deg, #1a1fd3, #1216a8);
+  box-shadow: 6px 0 24px rgba(0, 0, 0, 0.25);
+  z-index: 1100;
+
+  overflow: hidden;
+  transition: width 0.3s ease, box-shadow 0.3s ease;
+  transform: translateX(0);
+}
+
+/* ===== MENU TOGGLE BUTTON ===== */
+.menuClose {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  border-radius: 10px;
+
+  padding: 12px 18px;
+  margin-bottom: 24px;
+
+  font-size: 24px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+
+  transition: background 0.25s ease;
+}
+
+.menuClose:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.menuClose:active {
+    transform: scale(0.95);
+}
+/* ===== MENU LIST ===== */
+.menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu ul li {
+  margin-bottom: 8px;
+}
+
+/* Menu item */
+.menu ul li a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 12px 14px;
+  text-decoration: none;
+
+  font-size: 16px;
+  font-weight: 500;
+  color: #e6e9ff;
+  cursor: pointer;
+
+  border-radius: 10px;
+  transition: background 0.25s ease, transform 0.2s ease;
+  border-bottom: 2px solid #9d9d9d82;
+}
+
+/* Hover effect */
+.menu ul li a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(4px);
+}
+
+/* Active feedback */
+.menu ul li:active a {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(0.95);
+}
+
+/* ===== ICONS ===== */
+.icon {
+  font-size: 24px;
+  min-width: 32px;
+  text-align: center;
+}
+
+/* ===== MENU TEXT ===== */
+.menu-text {
+  font-weight: 600;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+}
+
+.user-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.171);
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.profile-img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #04cb8c;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.user-info p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #cbd5f5;
+}
+
+/* Collapsed sidebar */
+.menu.collapsed {
+  width: 72px;
+}
+
+/* Hide text when collapsed */
+.menu.collapsed .menu-text {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* Center icons when collapsed */
+.menu.collapsed ul li a {
+  justify-content: center;
+}
+.menu.collapsed .user-info {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+}
+
+/* Center icons when collapsed */
+.menu.collapsed .user-details {
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.099);
+}
+.menu.collapsed .user-details .profile-img {
+  margin-left: 10px;
+}
+
+/* ===== MAIN CONTENT AREA ===== */
+.attendance {
+  flex: 1;
+  padding: 30px 40px;
+  background: linear-gradient(135deg, #e0ecff, #f0f7ff, #e6fbff);
+  min-height: 100vh;
+  padding-left: 140px;
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ===== PUNCH BOX ===== */
+.punch-box {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  padding: 25px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+
+  max-width: 600px;
+  margin: 0 auto 30px auto;
+}
+
+.attendance h3 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.punch-box p {
+    margin: 10px 0;
+    font-size: 15px;
+    color: #555;
+}
+
+/* Punch Buttons */
+.punch-box button {
+    width: 250px;
+    height: 50px;
+    padding: 10px 20px;
+    margin-right: 12px;
+    border: none;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Punch In Button */
+.punch-box .punchIn-btn {
+    background-color: #2cc156;
+    color: #ffffff;
+}
+
+/* Punch Out Button */
+.punch-box .punchOut-btn {
+    background-color: #e25343;
+    color: #ffffff;
+}
+/* Hover Effects */
+.punch-box .punchIn-btn:hover {
+    background-color: #00b825;
+}
+.punch-box .punchOut-btn:hover {
+    background-color: #d30909;
+}
+.punch-box button:active {
+    transform: scale(0.90);
+}
+
+/* Disabled State */
+.punch-box button:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.punch-box button:disabled:hover {
+    background-color: #bdc3c7;
+}
+
+/*** ===== TABLE SELECTION ===== */
+.table-select {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  background: #f4f6fb;
+  padding: 12px 18px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  width: fit-content;
+}
+
+.table-select label {
+  font-weight: 600;
+  font-size: 14px;
+  color: #0f172a;
+  letter-spacing: 0.4px;
+}
+
+.table-select select {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  font-size: 14px;
+  outline: none;
+  background-color: #c5e0fb;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.table-select select:hover {
+  border-color: #2563eb;
+}
+
+/* Focus */
+.table-select select:focus {
+  border-color: #2563eb;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 2px rgba(37,99,235,0.15);
+}
+
+/* Dropdown arrow modern look */
+.table-select select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='%230f172a' height='20' viewBox='0 0 24 24' width='20' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 35px;
+}
+
+/* ===== TABLE SECTION ===== */
+
+/* Attendance Table */
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  background: #c1e0ffb9;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #77847b;
+}
+
+th {
+  background: #5ca9ed;
+  color: rgb(0, 0, 0);
+}
+
+.low-ot {
+  background-color: #ff0000;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:480px) {
+
+  .attendance {
+    padding: 20px 15px;
+    padding-left: 15px;
+  }
+
+  .punch-box {
+    width: 100%;
+  }
+
+  .punch-box button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+}
+@media (max-width: 768px) {
+
+  .attendance {
+    padding: 20px 15px;
+    padding-left: 15px;
+  }
+
+  .punch-box {
+    width: 100%;
+  }
+
+  .punch-box button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+}
+
+@media (max-width: 1024px) {
+  .punch-box {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+@media (min-width: 1400px) {
+
+  .punch-box {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+

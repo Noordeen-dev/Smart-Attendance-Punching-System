@@ -1,0 +1,115 @@
+<body>
+  <div class="main home-dashboard">
+    
+    <section class="user">
+      <p><img class="cmp-logo" src="assets/images/Acsyslogo.png" alt="Logo">Your Trusted IT Partner</p>
+      <div class="user-details">
+        <div class="user-info">
+          <h1>{{ Name }}</h1>
+          <p>Manage your account here</p>
+          <span class="logout-a" (click)="logOut()">Log-Out</span>
+        </div>
+        <img class="profile-img" [src]="profileImage" alt="profile-Image">
+      </div>
+    </section>
+  
+    <!-- Quick Stats -->
+    <section class="stats">
+      <div class="stat-card"> 
+        <h3>Employee ID</h3>
+        <p>{{ empId }}</p>
+      </div>
+  
+      <div class="stat-card">
+        <h3>Status</h3>
+        <p>{{ overallStatus }}</p>
+      </div>
+    </section>
+  
+    <!-- Main Features -->
+    <section class="feature-grid">
+  
+      <div class="feature-card" (click)="newReg()">
+        <img src="assets/images/newReg.png">
+        <h3>New Registration</h3>
+        <p>Create new user accounts</p>
+      </div>
+  
+      <div class="feature-card" (click)="userData()">
+        <img src="assets/images/userdata.png">
+        <h3>User Data</h3>
+        <p>View and manage employee records</p>
+      </div>
+  
+      <div class="feature-card" (click)="attendance()">
+        <img src="assets/images/Attendance.png">
+        <h3>Attendance</h3>
+        <p>Track and manage attendance</p>
+      </div>
+  
+      <div class="feature-card" (click)="forPass()">
+        <img src="assets/images/forgpass.png">
+        <h3>Change Password</h3>
+        <p>Update your login credentials</p>
+      </div>
+
+      <div class="feature-card" (click)="bill()">
+        <img src="assets/images/bill.png">
+        <h3>Billing Management</h3>
+        <p>Create and check the bill details</p>
+      </div>
+  
+    </section>
+  
+  </div>
+  <div>
+    <footer class="site-footer">
+        <div class="footer-top">
+      
+          <!-- Logo Section -->
+          <div class="footer-brand">
+            <img class="logo" src="assets/images/AcSysWBg.png" alt="AcSys Logo">
+          </div>
+      
+          <!-- Contact Columns -->
+          <div class="footer-columns">
+      
+            <div class="footer-section">
+              <h3>Company</h3>
+              <a href="#">Home</a>
+              <a href="#">Contact</a>
+              <a href="#">Customer Service</a>
+              <a href="#">Careers</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Legal</h3>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms & Conditions</a>
+                <a href="#">Refund Policy</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Social</h3>
+                <a href="#">LinkedIn</a>
+                <a href="#">Instagram</a>
+                <a href="#">Facebook</a>
+                <a href="#">X</a>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <a href="mailto:info@ekart.com">info@ekart.com</a>
+                <a href="tel:+919445949696">+91-94459-49696</a>
+                <a href="#">Chennai, India</a>
+            </div>
+        
+          </div>
+        </div>              
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p>© 2025 AcSys IT Pvt Ltd. All rights reserved.</p>
+        </div>
+      </footer>
+  </div>
+</body>
